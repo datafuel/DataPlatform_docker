@@ -58,4 +58,21 @@ services:
       MB_PASSWORD: $MB_PASSWORD
       MB_EMAIL: $MB_EMAIL
     stdin_open: true
-    tty: true 
+    tty: true
+
+## Meltano
+
+  meltano-ui:
+    image: meltano/meltano
+    command: ui
+    # command: init demo_project
+    volumes:
+    - ./demo_project/demo_project:/demo_project
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    restart: unless-stopped
+    working_dir: /demo_project
+    # stdin_open: true # docker run -i
+    # tty: true
