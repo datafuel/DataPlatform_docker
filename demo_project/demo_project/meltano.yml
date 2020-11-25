@@ -1,0 +1,15 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: 25d95513-ec3c-4752-aae5-ca2d1497995c
+plugins:
+  extractors:
+  - name: tap-postgres
+    variant: transferwise
+    pip_url: pipelinewise-tap-postgres
+  loaders:
+  - name: target-postgres
+    variant: datamill-co
+    pip_url: singer-target-postgres
+  - name: target-csv
+    variant: singer-io
+    pip_url: target-csv
