@@ -14,3 +14,4 @@ A complete Open Source Data Platform with ETL, DataWarehouse and DataViz
   
 ## Access services
   - Metabase : http://localhost:3000
+  - Meltano : http://localhost:5000
