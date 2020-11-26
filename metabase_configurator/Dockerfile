@@ -1,7 +1,10 @@
 FROM python:3.8
 
-# set the working directory in the container
-# WORKDIR /code
+# set the working directory in the image/container to /src
+WORKDIR /src
+
+# Add /src to PYTHONPATH
+ENV PYTHONPATH "/src"
 
 # copy the dependencies file to the working directory
 COPY requirements.txt .
@@ -9,10 +12,3 @@ COPY requirements.txt .
 # install dependencies
 RUN pip install -r requirements.txt
 
-WORKDIR /src
-
-# copy the content of the local src directory to the working directory
-# COPY src/ .
-
-# command to run on container start
-# CMD [ "python", "./server.py" ]

@@ -14,51 +14,50 @@ services:
       MB_DB_TYPE: postgres
       MB_DB_DBNAME: metabase
       MB_DB_PORT: 5432
-      MB_DB_USER: $MB_DB_USER
-      MB_DB_PASS: $MB_DB_PASS
+      MB_DB_USER: $MB_DB_ADMIN
+      MB_DB_PASS: $MB_DB_PASSWORD
       MB_DB_HOST: metabase_db
-      # MB_SETUP_TOKEN: $MB_SETUP_TOKEN
 
 
   metabase_db:
     image: postgres:10-alpine
     environment:
-      POSTGRES_PASSWORD: $MB_DB_PASS
-      POSTGRES_USER: $MB_DB_USER
+      POSTGRES_USER: $MB_DB_ADMIN
+      POSTGRES_PASSWORD: $MB_DB_PASSWORD
       POSTGRES_DB: metabase
       
   
   # postgreSQL service (share data between services)
 
-  postgres_db:
+  postgres_dwh:
     image: postgres:10-alpine
     volumes:
       - "./data_repo:/host"
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_USER: $POSTGRES_USER
+      POSTGRES_USER: $DWH_POSTGRES_ADMIN
+      POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
       POSTGRES_DB: testdb
 
   metabase_configurator:
     build: ./metabase_configurator
+    command: python -u app.py
     volumes:
       - ./metabase_configurator/src:/src
     depends_on: 
       - metabase
     environment:
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_USER: $POSTGRES_USER
-      POSTGRES_DB: testdb
-      POSTGRES_HOST: postgres_db
-      # MB_SETUP_TOKEN: $MB_SETUP_TOKEN
-      MB_FIRST_NAME: $MB_FIRST_NAME
-      MB_LAST_NAME: $MB_LAST_NAME
-      MB_PASSWORD: $MB_PASSWORD
-      MB_EMAIL: $MB_EMAIL
-    stdin_open: true
-    tty: true
+      DWH_POSTGRES_ADMIN: $DWH_POSTGRES_ADMIN
+      DWH_POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
+      DWH_POSTGRES_DB: testdb
+      DWH_POSTGRES_HOST: postgres_dwh
+      MB_ADMIN_FIRST_NAME: $MB_ADMIN_FIRST_NAME
+      MB_ADMIN_LAST_NAME: $MB_ADMIN_LAST_NAME
+      MB_ADMIN_EMAIL: $MB_ADMIN_EMAIL
+      MB_ADMIN_PASSWORD: $MB_ADMIN_PASSWORD
+    # stdin_open: true
+    # tty: true
 
 ## Meltano
 
