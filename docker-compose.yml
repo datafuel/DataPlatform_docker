@@ -109,7 +109,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - workspace:${WORKSPACE_ROOT}
-      - ${LOCAL_ROOT}:${LOCAL_ROOT}
+      - ${LOCAL_ROOT}:${LOCAL_DOCKER_MOUNT}
       - data:${CONFIG_ROOT}
     depends_on:
       - db
