@@ -21,7 +21,7 @@ Make sure to wait at least 30 seconds before launching MetaBase !
 
 ## Access services
   - Metabase : http://localhost:3000
-  - Meltano : http://localhost:5000
+  - Airbyte : http://localhost:8000
 
 
 ## Demo with Covid data
