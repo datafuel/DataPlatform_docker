@@ -146,6 +146,28 @@ services:
       - AIRBYTE_VERSION=${VERSION}
       - API_URL=${API_URL}
 
+  dbt:
+    # image: fishtownanalytics/dbt:0.18.1
+    build: ./dbt_repo
+    container_name: dbt
+    expose:
+      - 4444
+    ports:
+      - 4444:4444
+    volumes:
+      - ./dbt_repo/src:/src
+      - ./dbt_repo/profiles:/root/.dbt
+    environment:
+      DWH_POSTGRES_ADMIN: $DWH_POSTGRES_ADMIN
+      DWH_POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
+      DWH_POSTGRES_DB: testdb
+      DWH_POSTGRES_HOST: postgres_dwh
+      DWH_POSTGRES_PORT: 5432
+      DWH_POSTGRES_STG_SCHEMA: stg
+      DWH_POSTGRES_PRS_SCHEMA: prs
+    stdin_open: true
+    tty: true
+
 volumes:
   workspace:
     name: ${WORKSPACE_DOCKER_MOUNT}
