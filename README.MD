@@ -43,3 +43,14 @@ Make sure to wait at least 30 seconds before launching any service !
     - **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env)
     - **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)
 
+### Run Metabase Configurator
+
+1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
+2. Run `python app.py`
+
+### Run dbt
+
+1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
+2. Run `cd demo_project`
+3. Run `dbt run`
+
