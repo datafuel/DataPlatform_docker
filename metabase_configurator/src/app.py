@@ -99,7 +99,8 @@ def add_postgres_database(
             "db": database_name,
             "user": admin,
             "password": password
-        }
+        },
+        "is_full_sync": True
     }
 
     res_db = rq.post(setup_database_url, json=dc_db, headers=headers)

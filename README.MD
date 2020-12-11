@@ -17,8 +17,40 @@ A complete Open Source Data Platform with ETL, DataWarehouse and DataViz
 3. Rename **.env.example** to **.env** and replace dummy values with yours
 4. Run `docker-compose up` then access the services
 
-Make sure to wait at least 30 seconds before launching MetaBase ! 
+Make sure to wait at least 30 seconds before launching any service ! 
 
 ## Access services
   - Metabase : http://localhost:3000
-  - Meltano : http://localhost:5000
+  - Airbyte : http://localhost:8000
+
+
+## Demo with Covid data
+
+1. Run `docker-compose up`
+2. Wait until all services are ready then open http://localhost:8000
+3. Create a source with the values below (you can input the values of your choice for other fields) 
+    - **url** : https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7
+    - **format** : csv (and HTTPS: Public Web in the field below)
+    - **storage** : HTTPS
+    - **dataset_name** : covid-france
+    - **reader_options** : `{"quotechar":"\"", "sep":";"}`
+
+4. Create a destination with the values below (you can input the values of your choice for other fields)
+    - **host** : localhost
+    - **Port** : 5433
+    - **schema** : stg
+    - **database** : testdb
+    - **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env)
+    - **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)
+
+### Run Metabase Configurator
+
+1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
+2. Run `python app.py`
+
+### Run dbt
+
+1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
+2. Run `cd demo_project`
+3. Run `dbt run`
+
