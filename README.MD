@@ -22,6 +22,7 @@ Make sure to wait at least 30 seconds before launching any service !
 ## Access services
   - Metabase : http://localhost:3000
   - Airbyte : http://localhost:8000
+  - dbt docs : http://localhost:4444 (after running described below)
 
 
 ## Demo with Covid data
@@ -52,5 +53,9 @@ Make sure to wait at least 30 seconds before launching any service !
 
 1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
 2. Run `cd demo_project`
-3. Run `dbt run`
+3. Run `dbt run` to run the pipeline
+4. Run `dbt docs generate` to generate docs
+5. Run `dbt docs serve --port 4444`. You can then access the docs website on http://localhost:4444
+
+
 
