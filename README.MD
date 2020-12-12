@@ -22,7 +22,7 @@ Make sure to wait at least 30 seconds before launching any service !
 ## Access services
   - Metabase : http://localhost:3000
   - Airbyte : http://localhost:8000
-  - dbt docs : http://localhost:4444 (after running described below)
+  - dbt docs : http://localhost:4444 (after running the instructions described below)
 
 
 ## Demo with Covid data
