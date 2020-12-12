@@ -171,5 +171,15 @@ services:
 volumes:
   workspace:
     name: ${WORKSPACE_DOCKER_MOUNT}
+    driver: local
+    driver_opts:
+      type: none
+      device: ${WORKSPACE_LOCAL_PATH}
+      o: bind
   data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${DATA_LOCAL_PATH}
+      o: bind
   db:
