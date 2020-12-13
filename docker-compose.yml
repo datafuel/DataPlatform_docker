@@ -42,7 +42,8 @@ services:
       POSTGRES_DB: testdb
 
   metabase_configurator:
-    build: ./metabase_configurator
+    image: datafuel/metabase_configurator
+    # build: ./metabase_configurator
     container_name: metabase_configurator
     command: python -u app.py
     volumes:
@@ -149,8 +150,8 @@ services:
       - API_URL=${API_URL}
 
   dbt:
-    # image: fishtownanalytics/dbt:0.18.1
-    build: ./dbt_repo
+    image: datafuel/dbt
+    # build: ./dbt_repo
     container_name: dbt
     expose:
       - 4444

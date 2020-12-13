@@ -1,0 +1,39 @@
+name: Docker
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+      
+
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+
+
+jobs:
+
+  # Push image to GitHub Packages.
+  # See also https://docs.docker.com/docker-hub/builds/
+  push:
+
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker-compose -f dev.docker-compose.yml build
+
+      - name: Log into GitHub Container Registry
+        env: 
+          docker_login: ${{ secrets.DATAFUEL_DOCKER_USERNAME }}
+          docker_password: ${{ secrets.DATAFUEL_DOCKER_PASSWORD }} 
+        run: docker login -u $docker_login --password $docker_password
+
+      - name: Push image to GitHub Container Registry
+        run: |
+          docker-compose -f dev.docker-compose.yml push
