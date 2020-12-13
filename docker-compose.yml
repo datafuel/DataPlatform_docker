@@ -31,6 +31,7 @@ services:
 
   postgres_dwh:
     image: postgres:10-alpine
+    container_name: postgres_dwh
     volumes:
       - "./data_repo:/host"
     ports:
@@ -42,6 +43,7 @@ services:
 
   metabase_configurator:
     build: ./metabase_configurator
+    container_name: metabase_configurator
     command: python -u app.py
     volumes:
       - ./metabase_configurator/src:/src
