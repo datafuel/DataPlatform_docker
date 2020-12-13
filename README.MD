@@ -7,7 +7,7 @@
 
 ![Docker](https://github.com/datafuel/DataPlatform_docker/workflows/Docker/badge.svg)
 
-#About
+# About
 A complete Open Source Data Platform with ETL, DataWarehouse and DataViz
 
 # Prerequisites
