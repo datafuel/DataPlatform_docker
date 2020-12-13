@@ -45,12 +45,9 @@ Make sure to wait at least 30 seconds before launching any service !
 
 ### Run Metabase Configurator
 
-1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
-2. Run `python app.py`
+1. Run `docker exec metabase_configurator python app.py`
 
 ### Run dbt
 
-1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
-2. Run `cd demo_project`
-3. Run `dbt run`
+1. Run `docker exec -d dbt bash startup.sh`
 
