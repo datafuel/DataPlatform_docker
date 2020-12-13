@@ -22,6 +22,7 @@ Make sure to wait at least 30 seconds before launching any service !
 ## Access services
   - Metabase : http://localhost:3000
   - Airbyte : http://localhost:8000
+  - dbt docs : http://localhost:4444 (after running the instructions described below)
 
 
 ## Demo with Covid data
@@ -49,5 +50,5 @@ Make sure to wait at least 30 seconds before launching any service !
 
 ### Run dbt
 
-1. Run `docker exec -d dbt bash startup.sh`
+1. Run `docker exec -d dbt bash startup.sh`. You can then access the docs website on http://localhost:4444
 
