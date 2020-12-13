@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+
+  metabase_configurator:
+    image: datafuel/metabase_configurator
+    build: ./metabase_configurator
+
+  dbt:
+    image: datafuel/dbt
+    build: ./dbt_repo
+    
