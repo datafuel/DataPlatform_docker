@@ -6,7 +6,8 @@
 </p>
 
 #About
-A complete Open Source Data Platform with ETL, DataWarehouse and DataViz
+A complete Open Source Data Platform with an ETL (EL:Airbyte, T:DBT), a DataWarehouse (Postgres) and a tool for DataViz (Metabase). 
+Airbyte is an open-source data integration engine that helps you consolidate your data in your warehouses.
 
 # Prerequisites
 - Docker (started) and docker-compose (just install Docker for Desktop if you are on laptop) 
@@ -22,7 +23,7 @@ Make sure to wait at least 30 seconds before launching any service !
 ## Access services
   - Metabase : http://localhost:3000
   - Airbyte : http://localhost:8000
-
+  - Adminer : http://localhost:8080
 
 ## Demo with Covid data
 
@@ -40,7 +41,7 @@ Make sure to wait at least 30 seconds before launching any service !
     - **Port** : 5433
     - **schema** : stg
     - **database** : testdb
-    - **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env)
+    - **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env) (make sure to use 8 characters)
     - **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)
 
 ### Run Metabase Configurator
@@ -54,3 +55,8 @@ Make sure to wait at least 30 seconds before launching any service !
 2. Run `cd demo_project`
 3. Run `dbt run`
 
+### Access Adminer 
+- **host** : Name of the service, here postgres_dwh
+- **database** : testdb
+- **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env) (make sure to use 8 characters)
+- **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)

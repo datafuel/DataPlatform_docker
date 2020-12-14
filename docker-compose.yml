@@ -39,6 +39,12 @@ services:
       POSTGRES_USER: $DWH_POSTGRES_ADMIN
       POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
       POSTGRES_DB: testdb
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
 
   metabase_configurator:
     build: ./metabase_configurator
