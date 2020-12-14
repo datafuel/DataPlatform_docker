@@ -36,9 +36,10 @@ models:
       # Applies to all files under models/example/
       stg:
           materialized: table
+          schema: stg
       ods:
           materialized: table
           schema: ods
       prs:
           materialized: view
-          schema: prs
+          

@@ -52,5 +52,11 @@ Make sure to wait at least 30 seconds before launching any service !
 
 ### Run dbt
 
-1. Run `docker exec -d dbt bash startup.sh`. You can then access the docs website on http://localhost:4444
+1. Run `docker exec -d dbt bash startup.sh`
+
+    You can then access the docs website on http://localhost:4444
+
+## Dependencies
+
+This project use [dbt-metabase](https://github.com/gouline/dbt-metabase). [gouline](https://github.com/gouline) is the owner the code used in /metabt.
 

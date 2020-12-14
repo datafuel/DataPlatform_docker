@@ -9,6 +9,6 @@ default:
       user: "{{ env_var('DWH_POSTGRES_ADMIN') }}"
       pass: "{{ env_var('DWH_POSTGRES_PASSWORD') }}"
       dbname: "{{ env_var('DWH_POSTGRES_DB') }}"
-      schema: "{{ env_var('DWH_POSTGRES_STG_SCHEMA', 'public') }}"
+      schema: "{{ env_var('DWH_POSTGRES_PRS_SCHEMA', 'public') }}"
 
   target: dev

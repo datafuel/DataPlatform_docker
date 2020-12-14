@@ -160,11 +160,14 @@ services:
     volumes:
       - ./dbt_repo/src:/src
       - ./dbt_repo/profiles:/root/.dbt
+      - ./dbt_repo/metabt:/src_metabt/metabt
     environment:
       DWH_POSTGRES_ADMIN: $DWH_POSTGRES_ADMIN
       DWH_POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
       DWH_POSTGRES_DB: testdb
       DWH_POSTGRES_HOST: postgres_dwh
+      MB_ADMIN_EMAIL: $MB_ADMIN_EMAIL
+      MB_ADMIN_PASSWORD: $MB_ADMIN_PASSWORD
       DWH_POSTGRES_PORT: 5432
       DWH_POSTGRES_STG_SCHEMA: stg
       DWH_POSTGRES_PRS_SCHEMA: prs
