@@ -5,9 +5,11 @@
   </a>
 </p>
 
-#About
+
+# About
 A complete Open Source Data Platform with an ETL (EL:Airbyte, T:DBT), a DataWarehouse (Postgres) and a tool for DataViz (Metabase). 
 Airbyte is an open-source data integration engine that helps you consolidate your data in your warehouses.
+
 
 # Prerequisites
 - Docker (started) and docker-compose (just install Docker for Desktop if you are on laptop) 
@@ -23,6 +25,7 @@ Make sure to wait at least 30 seconds before launching any service !
 ## Access services
   - Metabase : http://localhost:3000
   - Airbyte : http://localhost:8000
+  - dbt docs : http://localhost:4444 (after running the instructions described below)
   - Adminer : http://localhost:8080
 
 ## Demo with Covid data
@@ -46,14 +49,11 @@ Make sure to wait at least 30 seconds before launching any service !
 
 ### Run Metabase Configurator
 
-1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
-2. Run `python app.py`
+1. Run `docker exec metabase_configurator python app.py`
 
 ### Run dbt
 
-1. Attach shell by running `docker exec -it <container-id> bash` or through your IDE (in VS Code, by left-click on Container>Attach shell)
-2. Run `cd demo_project`
-3. Run `dbt run`
+1. Run `docker exec -d dbt bash startup.sh`. You can then access the docs website on http://localhost:4444
 
 ### Access Adminer 
 - **host** : Name of the service, here postgres_dwh
