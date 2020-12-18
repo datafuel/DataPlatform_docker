@@ -46,6 +46,12 @@ Make sure to wait at least 30 seconds before launching any service !
     - **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env)
     - **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)
 
+5. Create another **File** source connector with the following arguments :
+    - **url** : https://www.data.gouv.fr/fr/datasets/r/70cef74f-70b1-495a-8500-c089229c0254
+    - **format** : csv (and HTTPS: Public Web in the field below)
+    - **storage** : HTTPS
+    - **dataset_name** : departements-france
+    - **reader_options** : *Leave empty*
 ### Run Metabase Configurator
 
 1. Run `docker exec dbt python metabase_setup.py`
