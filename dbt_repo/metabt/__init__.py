@@ -1,7 +1,7 @@
 import logging
 
 from .dbt import DbtReader
-from .metabase import MetabaseClient
+from .metabase import MetabaseClient, AdminClient
 
 __version__ = '0.5.1'
 
