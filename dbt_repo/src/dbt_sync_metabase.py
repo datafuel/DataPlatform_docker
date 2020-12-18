@@ -11,13 +11,11 @@ MB_ADMIN_PASSWORD = os.environ['MB_ADMIN_PASSWORD']
 if __name__ == "__main__":
 
     metabt.export(
-        dbt_path='./demo_path', 
+        dbt_path='/src/demo_project', 
         mb_host='metabase:3000', 
         mb_user=MB_ADMIN_EMAIL, 
         mb_password=MB_ADMIN_PASSWORD, 
         database="DWH Postgres", 
-        schema=DWH_POSTGRES_PRS_SCHEMA,
         mb_https=False,
-        sync=True,
-        includes=["covid-france"]
+        sync=True
     )

@@ -7,24 +7,33 @@ models:
       columns:
           - name: Date_Notification
             description: "Date of notice"
-            metabase.special_type: type/CreationDate
+            meta:
+              metabase.special_type: type/CreationDate
           - name: Region
             description: "French Region"
-            metabase.special_type: type/State
+            meta:
+              metabase.special_type: type/State
           - name: Departement
             description: "French Departement"
-            metabase.special_type: type/State
+            meta:
+              metabase.special_type: type/State
           - name: Sexe
             description: "Sex"
+            meta:
+              metabase.special_type: type/Text
           - name: Nb_Hospitalisations
             description: "Number of people currently hospitalized"
-            metabase.special_type: type/Number
+            meta:
+              metabase.special_type: type/Number
           - name: Nb_Hospitalisations
             description: "Number of people currently in resuscitation or critical care"
-            metabase.special_type: type/Number
+            meta:
+              metabase.special_type: type/Number
           - name: Nb_Retours_au_Domicile
             description: "Total amount of patient that returned home"
-            metabase.special_type: type/Number
+            meta:
+              metabase.special_type: type/Number
           - name: Nb_Deces
             description: "Total amout of deaths at the hospital"
-            metabase.special_type: type/Number
+            meta:
+              metabase.special_type: type/Number

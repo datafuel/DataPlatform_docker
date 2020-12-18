@@ -2,12 +2,18 @@ import logging
 
 from .dbt import DbtReader
 from .metabase import MetabaseClient, AdminClient
+from .configurator_settings import (
+    DWH_POSTGRES_ADMIN, DWH_POSTGRES_PASSWORD, DWH_POSTGRES_DB, 
+    DWH_POSTGRES_HOST, MB_ADMIN_FIRST_NAME, MB_ADMIN_LAST_NAME, 
+    MB_ADMIN_EMAIL, MB_ADMIN_PASSWORD, SETUP_TOKEN_URL, 
+    SETUP_ADMIN_URL, SETUP_DATABASE_URL, NEW_USER_URL
+)
 
 __version__ = '0.5.1'
 
 def export(dbt_path: str, 
         mb_host: str, mb_user: str, mb_password: str,
-        database: str, schema: str,
+        database: str,
         mb_https = True, sync = True, sync_timeout = 30, 
         includes = [], excludes = []):
     """Exports models from dbt to Metabase.
@@ -27,19 +33,22 @@ def export(dbt_path: str,
         includes {list} -- Model names to limit processing to. (default: {[]})
         excludes {list} -- Model names to exclude. (default: {[]})
     """
-
+   
     mbc = MetabaseClient(mb_host, mb_user, mb_password, mb_https)
+    print('used path')
+    print(dbt_path)
     models = DbtReader(dbt_path).read_models(
-        includes=includes, 
-        excludes=excludes
+        # includes=includes, 
+        # excludes=excludes
     )
-
+    print('dbt reader output')
+    print(models)
     if sync:
-        if not mbc.sync_and_wait(database, schema, models, sync_timeout):
+        if not mbc.sync_and_wait(database, models, sync_timeout):
             logging.critical("Sync timeout reached, models still not compatible")
             return
     
-    mbc.export_models(database, schema, models)
+    mbc.export_models(database, models)
 
 def main(args: list = None):
     import argparse
@@ -56,7 +65,7 @@ def main(args: list = None):
     parser.add_argument('--mb_password', metavar='PASS', required=True, help="Metabase password")
     parser.add_argument('--mb_https', metavar='HTTPS', type=bool, default=True, help="use HTTPS to connect to Metabase instead of HTTP")
     parser.add_argument('--database', metavar='DB', required=True, help="target database name")
-    parser.add_argument('--schema', metavar='SCHEMA', required=True, help="target schema name")
+    # parser.add_argument('--schema', metavar='SCHEMA', required=True, help="target schema name")
     parser.add_argument('--sync', metavar='ENABLE', type=bool, default=True, help="synchronize Metabase database before export")
     parser.add_argument('--sync_timeout', metavar='SECS', type=int, default=30, help="synchronization timeout (in secs)")
     parser.add_argument('--includes', metavar='MODELS', nargs='*', default=[], help="model names to limit processing to")
@@ -71,7 +80,7 @@ def main(args: list = None):
             mb_password=parsed.mb_password,
             mb_https=parsed.mb_https,
             database=parsed.database,
-            schema=parsed.schema,
+            # schema=parsed.schema,
             sync=parsed.sync,
             sync_timeout=parsed.sync_timeout,
             includes=parsed.includes,

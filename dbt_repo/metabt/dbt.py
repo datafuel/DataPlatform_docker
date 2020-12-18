@@ -9,6 +9,11 @@ _META_FIELDS = [
     'visibility_type'
 ]
 
+STG_SCHEMA = 'stg'
+ODS_SCHEMA = 'ods'
+PRS_SCHEMA = 'prs'
+
+
 class DbtReader:
     """Reader for dbt project configuration.
     """
@@ -36,16 +41,17 @@ class DbtReader:
         mb_models = []
 
         for path in (Path(self.project_path) / 'models').rglob('*.yml'):
+            schema = self.get_schema_from_path(path)
             with open(path, 'r') as stream:
-                schema = yaml.safe_load(stream)
-                for model in schema.get('models', []):
+                db_dict = yaml.safe_load(stream)
+                for model in db_dict.get('models', []):
                     name = model['name']
                     if (not includes or name in includes) and (name not in excludes):
-                        mb_models.append(self.read_model(model))
+                        mb_models.append(self.read_model(model, schema))
         
         return mb_models
     
-    def read_model(self, model: dict) -> dict:
+    def read_model(self, model: dict, schema: str) -> dict:
         """Reads one dbt model in Metabase-friendly format.
         
         Arguments:
@@ -63,7 +69,8 @@ class DbtReader:
         return {
             'name': model['name'].upper(),
             'description': model.get('description'),
-            'columns': mb_columns
+            'columns': mb_columns,
+            'schema': schema
         }
     
     def read_column(self, column: dict) -> dict:
@@ -112,3 +119,30 @@ class DbtReader:
         if matches:
             return matches[0]
         return text
+
+    @staticmethod
+    def get_schema_from_path(path: str) -> str:
+        """Parses dbt ref() statement.
+        
+        Arguments:
+            text {str} -- Full statement in dbt YAML.
+        
+        Returns:
+            str -- Name of the reference.
+        """
+        path = path.as_posix()
+        if 'models/stg' in path:
+            schema = STG_SCHEMA
+
+        elif 'models/ods' in path:
+            schema = ODS_SCHEMA
+
+        elif 'models/prs' in path:
+            schema = PRS_SCHEMA
+
+        else:
+            schema = None
+            print('error')
+            raise NotImplementedErrorNotImplemented
+        
+        return schema
