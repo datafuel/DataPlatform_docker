@@ -1,2 +1,5 @@
 dbt
 SQLAlchemy
+dbt-metabase
+# PyYAML
+# requests

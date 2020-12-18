@@ -31,14 +31,14 @@ Make sure to wait at least 30 seconds before launching any service !
 
 1. Run `docker-compose up`
 2. Wait until all services are ready then open http://localhost:8000
-3. Create a source with the values below (you can input the values of your choice for other fields) 
+3. Create a **File** source with the values below (you can input the values of your choice for other fields) 
     - **url** : https://www.data.gouv.fr/fr/datasets/r/63352e38-d353-4b54-bfd1-f1b3ee1cabd7
     - **format** : csv (and HTTPS: Public Web in the field below)
     - **storage** : HTTPS
     - **dataset_name** : covid-france
     - **reader_options** : `{"quotechar":"\"", "sep":";"}`
 
-4. Create a destination with the values below (you can input the values of your choice for other fields)
+4. Create a **Postgres** destination with the values below (you can input the values of your choice for other fields)
     - **host** : localhost
     - **Port** : 5433
     - **schema** : stg
@@ -46,11 +46,28 @@ Make sure to wait at least 30 seconds before launching any service !
     - **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env)
     - **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)
 
+5. Create another **File** source connector with the following arguments :
+    - **url** : https://www.data.gouv.fr/fr/datasets/r/70cef74f-70b1-495a-8500-c089229c0254
+    - **format** : csv (and HTTPS: Public Web in the field below)
+    - **storage** : HTTPS
+    - **dataset_name** : departements-france
+    - **reader_options** : *Leave empty*
 ### Run Metabase Configurator
 
-1. Run `docker exec metabase_configurator python app.py`
+1. Run `docker exec dbt python metabase_setup.py`
 
 ### Run dbt
 
-1. Run `docker exec -d dbt bash startup.sh`. You can then access the docs website on http://localhost:4444
+1. Run `docker exec -d dbt bash run_dbt.sh`
+
+
+### Run dbt-docs website
+
+1. Run `docker exec -d dbt bash serve_dbt_docs.sh`
+
+    You can then access the docs website on http://localhost:4444
+
+## Projects that we used
+
+This project use [dbt-metabase](https://github.com/gouline/dbt-metabase). [gouline](https://github.com/gouline) is the owner of the code used in /metabt (except Admin Class that was part of the metabase_configurator service).
 

@@ -5,18 +5,35 @@ models:
     - name: covid-france
       description: "Data about Covid in France, ready for analysis"
       columns:
-          - name: departement
-            description: "French Departement"
-          - name: sexe
-            description: "Sex"
-          - name: date_notification
+          - name: Date_Notification
             description: "Date of notice"
-          - name: nb_hospitalisations
+            meta:
+              metabase.special_type: type/CreationDate
+          - name: Region
+            description: "French Region"
+            meta:
+              metabase.special_type: type/State
+          - name: Departement
+            description: "French Departement"
+            meta:
+              metabase.special_type: type/State
+          - name: Sexe
+            description: "Sex"
+            meta:
+              metabase.special_type: type/Text
+          - name: Nb_Hospitalisations
             description: "Number of people currently hospitalized"
-          - name: nb_reanimations
+            meta:
+              metabase.special_type: type/Number
+          - name: Nb_Hospitalisations
             description: "Number of people currently in resuscitation or critical care"
-          - name: nb_retours_au_domicile
+            meta:
+              metabase.special_type: type/Number
+          - name: Nb_Retours_au_Domicile
             description: "Total amount of patient that returned home"
-          - name: nb_deces
+            meta:
+              metabase.special_type: type/Number
+          - name: Nb_Deces
             description: "Total amout of deaths at the hospital"
-            
+            meta:
+              metabase.special_type: type/Number

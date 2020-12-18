@@ -1,11 +1,12 @@
 -- {{ config(materialized='view', schema='prs') }}
-select
-    nb_deces,
-    departement,
-    nb_retours_au_domicile,
-    nb_reanimations,
-    nb_hospitalisations,
-    date_notification,
-    sexe
-    
-from {{ref('covid-france_ods')}}
+
+SELECT 
+    Date_Notification,
+    Region,
+    Departement,
+    Sexe,
+    Nb_Reanimations,
+    Nb_Hospitalisations,
+    Nb_Retours_au_Domicile,
+    Nb_Deces
+FROM {{ref('covid-france_ods')}}

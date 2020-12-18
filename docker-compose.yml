@@ -41,26 +41,6 @@ services:
       POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
       POSTGRES_DB: testdb
 
-  metabase_configurator:
-    image: datafuel/metabase_configurator
-    # build: ./metabase_configurator
-    container_name: metabase_configurator
-    command: python -u app.py
-    volumes:
-      - ./metabase_configurator/src:/src
-    depends_on: 
-      - metabase
-    environment:
-      DWH_POSTGRES_ADMIN: $DWH_POSTGRES_ADMIN
-      DWH_POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
-      DWH_POSTGRES_DB: testdb
-      DWH_POSTGRES_HOST: postgres_dwh
-      MB_ADMIN_FIRST_NAME: $MB_ADMIN_FIRST_NAME
-      MB_ADMIN_LAST_NAME: $MB_ADMIN_LAST_NAME
-      MB_ADMIN_EMAIL: $MB_ADMIN_EMAIL
-      MB_ADMIN_PASSWORD: $MB_ADMIN_PASSWORD
-    # stdin_open: true
-    # tty: true
 
 ## Airbyte
 
@@ -152,6 +132,7 @@ services:
   dbt:
     image: datafuel/dbt
     # build: ./dbt_repo
+    # command: python -u metabase_setup.py
     container_name: dbt
     expose:
       - 4444
@@ -160,14 +141,19 @@ services:
     volumes:
       - ./dbt_repo/src:/src
       - ./dbt_repo/profiles:/root/.dbt
+      - ./dbt_repo/metabt:/src_metabt/metabt
     environment:
       DWH_POSTGRES_ADMIN: $DWH_POSTGRES_ADMIN
       DWH_POSTGRES_PASSWORD: $DWH_POSTGRES_PASSWORD
       DWH_POSTGRES_DB: testdb
       DWH_POSTGRES_HOST: postgres_dwh
+      MB_ADMIN_EMAIL: $MB_ADMIN_EMAIL
+      MB_ADMIN_PASSWORD: $MB_ADMIN_PASSWORD
       DWH_POSTGRES_PORT: 5432
       DWH_POSTGRES_STG_SCHEMA: stg
       DWH_POSTGRES_PRS_SCHEMA: prs
+      MB_ADMIN_FIRST_NAME: $MB_ADMIN_FIRST_NAME
+      MB_ADMIN_LAST_NAME: $MB_ADMIN_LAST_NAME
     stdin_open: true
     tty: true
 

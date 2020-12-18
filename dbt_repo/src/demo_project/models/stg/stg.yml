@@ -18,3 +18,17 @@ sources:
           - name: data
             description: >
               A json blob representing with the event data. The column type in Postgres is JSONB.
+      - name: departements-france_stg
+        identifier: departements-france_raw
+        description: >
+          One record per day per department in France with covid data.
+        columns:
+          - name: ab_id
+            description: >
+              A uuid assigned by Airbyte to each event that is processed. The column type in Postgres is VARCHAR.
+          - name: emitted_at
+            description: >
+              A timestamp representing when the event was pulled from the data source. The column type in Postgres is TIMESTAMP WITH TIME ZONE.
+          - name: data
+            description: >
+              A json blob representing with the event data. The column type in Postgres is JSONB.

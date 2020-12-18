@@ -32,13 +32,17 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
-  demo_project:
-      # Applies to all files under models/example/
-      stg:
-          materialized: table
-      ods:
-          materialized: table
-          schema: ods
-      prs:
-          materialized: view
-          schema: prs
+    demo_project:
+        # Applies to all files under models/example/
+        stg:
+            materialized: table
+            schema: stg
+        ods:
+            materialized: table
+            process-airbyte-outputs:
+                schema: ods
+            unions:
+                schema: ods
+        prs:
+            materialized: view
+          

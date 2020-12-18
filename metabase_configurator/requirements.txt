@@ -1,2 +1,0 @@
-metabase-api
-requests
