@@ -58,7 +58,12 @@ Make sure to wait at least 30 seconds before launching any service !
 
 ### Run dbt
 
-1. Run `docker exec -d dbt bash startup.sh`
+1. Run `docker exec -d dbt bash run_dbt.sh`
+
+
+### Run dbt-docs website
+
+1. Run `docker exec -d dbt bash serve_dbt_docs.sh`
 
     You can then access the docs website on http://localhost:4444
 
