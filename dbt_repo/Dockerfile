@@ -12,9 +12,3 @@ COPY requirements.txt .
 
 # install dependencies
 RUN pip install -r requirements.txt
-
-WORKDIR /src/demo_project
-
-ADD ./src/demo_project/startup.sh .
-
-RUN chmod +x startup.sh
