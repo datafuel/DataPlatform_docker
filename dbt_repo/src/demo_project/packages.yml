@@ -1,3 +1,0 @@
-packages:
-  - git: "https://github.com/datafuel/Covid-France_dbt.git"
-    revision: "0.0.1"
