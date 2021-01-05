@@ -35,14 +35,10 @@ def export(dbt_path: str,
     """
    
     mbc = MetabaseClient(mb_host, mb_user, mb_password, mb_https)
-    print('used path')
-    print(dbt_path)
     models = DbtReader(dbt_path).read_models(
         # includes=includes, 
         # excludes=excludes
     )
-    print('dbt reader output')
-    print(models)
     if sync:
         if not mbc.sync_and_wait(database, models, sync_timeout):
             logging.critical("Sync timeout reached, models still not compatible")
