@@ -69,7 +69,6 @@ class MetabaseClient:
             logging.critical("Timeout provided %d secs, must be at least %d", timeout, self._SYNC_PERIOD_SECS)
             return
         database_id = self.find_database_id(database)
-        print(database_id)
         print(f'{database}/{database_id} Sync in progress..')
 
         if not database_id:
@@ -77,7 +76,6 @@ class MetabaseClient:
             return
         
         response_sync = self.api('post', f'/api/database/{database_id}/sync')
-        print(response_sync)
 
         deadline = int(time.time()) + timeout
         sync_successful = False
@@ -127,8 +125,7 @@ class MetabaseClient:
             models {list} -- List of dbt models read from project.
         """
 
-        print('Exporting models')
-        print(models)
+
         database_id = self.find_database_id(database)
         if not database_id:
             logging.critical("Cannot find database by name %s", database)
@@ -137,7 +134,7 @@ class MetabaseClient:
         table_lookup, field_lookup = self.build_metadata_lookups(database_id)
 
         for model in models:
-            print(f'Model : {model} | table_lookup : {table_lookup} | field_lookup : {field_lookup}')
+            
             self.export_model(model, table_lookup, field_lookup)
     
     def export_model(self, model: dict, table_lookup: dict, field_lookup: dict):
@@ -210,14 +207,12 @@ class MetabaseClient:
             column['visibility_type'] = 'normal'
 
         api_field = self.api('get', f'/api/field/{field_id}')
-        print(f'trying the if for {column_name}')
         if api_field['description'] != column.get('description') or \
                 api_field['special_type'] != column.get('special_type') or \
                 api_field['visibility_type'] != column.get('visibility_type') or \
                 api_field['fk_target_field_id'] != fk_target_field_id:
             # Update with new values
             print(f'Updating {column_name}')
-            print(column)
             self.api('put', f'/api/field/{field_id}', json={
                 'description': column.get('description'),
                 'special_type': column.get('special_type'),
@@ -298,8 +293,6 @@ class MetabaseClient:
                 table_field_lookup[field_name] = field
 
             field_lookup[table_name] = table_field_lookup
-        # print('table_name : ', table_name)
-        # print('field_lookup : ', field_lookup)
         return table_lookup, field_lookup
 
     def api(self, method: str, path: str, authenticated = True, critical = True, **kwargs) -> Any:
@@ -411,7 +404,6 @@ class AdminClient:
         if res_admin.ok:
             auth_token = res_admin.json()['id']
             
-            print(auth_token)
             print('Admin created')
         
             return auth_token
