@@ -25,7 +25,7 @@ Make sure to wait at least 30 seconds before launching any service !
   - Metabase : http://localhost:3000
   - Airbyte : http://localhost:8000
   - dbt docs : http://localhost:4444 (after running the instructions described below)
-
+  - Adminer : http://localhost:8080
 
 ## Demo with Covid data
 
@@ -52,20 +52,23 @@ Make sure to wait at least 30 seconds before launching any service !
     - **storage** : HTTPS
     - **dataset_name** : departements-france
     - **reader_options** : *Leave empty*
-### Run Metabase Configurator
 
+### Run Metabase Configurator
 1. Run `docker exec dbt python metabase_setup.py`
 
 ### Run dbt
-
-1. Run `docker exec -d dbt bash run_dbt.sh`
-
+1. Run `docker exec dbt bash run_dbt.sh`
 
 ### Run dbt-docs website
-
 1. Run `docker exec -d dbt bash serve_dbt_docs.sh`
+You can then access the docs website on http://localhost:4444
 
-    You can then access the docs website on http://localhost:4444
+
+### Access Adminer 
+- **host** : Name of the service, here postgres_dwh
+- **database** : testdb
+- **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env) (make sure to use 8 characters)
+- **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)
 
 ## Projects that we used
 

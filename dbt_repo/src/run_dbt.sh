@@ -1,5 +1,5 @@
 # Download covid-france dbt package
-dbt deps --project-dir ./demo_project
+# dbt deps --project-dir ./demo_project
 
 # Create tables and views
 dbt run --project-dir ./demo_project
