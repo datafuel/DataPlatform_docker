@@ -18,7 +18,11 @@ services:
       MB_DB_PASS: $MB_DB_PASSWORD
       MB_DB_HOST: metabase_db
 
-
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
   metabase_db:
     image: postgres:10-alpine
     environment:
