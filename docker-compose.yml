@@ -125,6 +125,12 @@ services:
       - AIRBYTE_ROLE=${AIRBYTE_ROLE:-}
       - API_URL=${API_URL}
 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
   dbt:
     image: datafuel/dbt
     # build: ./dbt_repo
@@ -152,6 +158,7 @@ services:
       MB_ADMIN_LAST_NAME: $MB_ADMIN_LAST_NAME
     stdin_open: true
     tty: true
+    
 volumes:
   workspace:
     name: ${WORKSPACE_DOCKER_MOUNT}
