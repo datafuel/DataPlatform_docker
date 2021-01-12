@@ -67,6 +67,14 @@ Make sure to wait at least 30 seconds before launching any service !
 
     You can then access the docs website on http://localhost:4444
 
+### Access Adminer 
+
+- **host** : Name of the service, here postgres_dwh
+- **database** : testdb
+- **password** : <your-database-password> (DWH_POSTGRES_PASSWORD in .env) (make sure to use 8 characters)
+- **username** : <your-database-username> (DWH_POSTGRES_USERNAME in .env)
+
+
 ## Projects that we used
 
 This project use [dbt-metabase](https://github.com/gouline/dbt-metabase). [gouline](https://github.com/gouline) is the owner of the code used in /metabt (except Admin Class that was part of the metabase_configurator service).
